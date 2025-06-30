@@ -10,6 +10,7 @@ from ytmusicapi import YTMusic
 from typing import Optional, Union, Iterator, Dict, List
 from collections import namedtuple
 from dataclasses import dataclass, field
+import spotify2ytmusic.ytmusic_credentials as ytmusic_credentials
 
 
 SongInfo = namedtuple("SongInfo", ["title", "artist", "album"])
@@ -419,6 +420,8 @@ def copier(
                     )
                     time.sleep(exception_sleep)
                     exception_sleep *= 2
+                    ytmusic_credentials.setup_ytmusic_with_raw_headers() 
+                    yt = get_ytmusic() 
 
         if track_sleep:
             time.sleep(track_sleep)
